@@ -1,0 +1,21 @@
+<launch>
+
+	<node pkg="pses_rundkurs" type="wallfollow_node" name="wallfollow_node" output="screen">
+		<param name="p" value="700" type="int"/>
+		<param name="i" value="0" type="double"/>
+		<param name="d" value="30000" type="int"/>
+	</node>
+	<node pkg="pses_rundkurs" type="simple_corner_node" name="simple_corner_node" output="screen">
+		<param name="steering_angle_long" type="int" value="120"/>
+		<param name="steering_angle_short" value="220" type="int"/>
+		<param name="steering_angle_2_half_long" value="310" type="int"/>
+		<param name="steering_angle_2_half_short" value="450" type="int"/>
+		<param name="steering_angle_2_threshold" value="45" type="int"/>
+	</node>
+	<node pkg="pses_rundkurs" type="rundkurs_node" name="rundkurs_node" output="screen">
+			<param name="vse" value="false" type="bool"/>
+		</node>
+	<node pkg="pses_rundkurs" type="USR_Filter" name="USR_Filter" output="screen">
+		</node>
+	
+</launch>

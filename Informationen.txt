@@ -1,0 +1,18 @@
+Verkehrsschilderkennung
+- vse -> Verkehrsschilderkennung
+- find-object -> Objekterkennung (http://wiki.ros.org/find_object_2d)
+
+bei find-object haben wir eine kleine Anpassung in find-object/src/ros/tf_example_node.cpp vorgenommen (publisher für "vse_id" und "vse_distance")
+
+Rundkurs ohne Hindernisse
+- pses_rundkurs 
+- depthimage_to_laserscan (http://wiki.ros.org/depthimage_to_laserscan)
+
+Visuelle Odometrie
+- visual_odometry
+
+Rundkurs mit Hindernisse
+- herbie_base_controller -> Umrechnung der Daten von navigation_stack für UC_bridge
+- herbie_2dnav -> Paramter und Launchfile für navigation_stack
+- navigation_stack (http://wiki.ros.org/navigation)
+- teb_local_planner (http://wiki.ros.org/teb_local_planner)

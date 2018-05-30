@@ -1,0 +1,5 @@
+<launch>
+	<include file="$(find herbie_2dnav)/herbie_configuration.launch"/>
+	<include file="$(find herbie_2dnav)/move_base.launch"/>
+
+</launch>

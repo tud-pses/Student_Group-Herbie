@@ -1,0 +1,39 @@
+<launch>
+
+<include file="$(find pses_ucbridge)/launch/uc_bridge.launch"/>
+
+<include file="$(find kinect2_bridge)/launch/kinect2_bridge.launch"/>
+
+<include file="$(find pses_kinect_utilities)/launch/kinect_filter.launch"/>
+
+ <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+       <remap from="image" to="/kinect_utilities/depth_image_filtered"/>
+        <remap from="camera_info" to="/kinect_utilities/camera_info"/>
+        <remap from="scan" to="/scan_old"/>
+	  <param name="range_max"         type="double"    value="10.0"/>
+	<param name="range_min"         type="double"    value="0.5"/>
+ </node>
+
+
+<node pkg="pses_odometry" type="odometry_node" name="odometry_node" output="screen"></node>
+
+
+<node  pkg="map_server" type="map_server" name="map_server" args="/home/pses/Downloads/Maps/FG_ES_RS_map/map.yaml"/>
+
+<!-- transformations -->
+
+  <node pkg="tf" type="static_transform_publisher" name="base_footprint_2_base_link" args="-0.13 0 0 0 0 0 1 /base_footprint /base_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="base_link_2_laser_link" args="0.26 0 0.25 0 0 0 1 /base_link /laser_link  100"/>
+  <node pkg="tf" type="static_transform_publisher" name="laserscan_2_base_frame" args="0 0 0 0 0 0 /base_footprint /camera_depth_frame 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="laserlink2_kinect2link" args="0 0 0 0 0 0 1  /laser_link /kinect2_link 100"/>
+<!--
+  <node pkg="tf" type="static_transform_publisher" name="laserlink_2_kinect2iropticalframe" args="0 0 0 0 0 0 1  /laser_link /kinect2_ir_optical_frame 100"/>
+
+  <node pkg="tf" type="static_transform_publisher" name="laserlink_2_kinect2rgbopticalframe" args="0 0 0 0 0 0 1  /laser_link /kinect2_rgb_optical_frame 100"/>
+-->
+<!--
+<node pkg="tf" type="static_transform_publisher" name="baselink_2_frontsensor" args="0 0 0 0 0 0 1  /base_link /front_sensor 100"/>
+<node pkg="tf" type="static_transform_publisher" name="baselink_2_leftsensor" args="0 0 0 0 0 0 1  /base_link /left_sensor 100"/>
+<node pkg="tf" type="static_transform_publisher" name="baselink_2_rightsensor" args="0 0 0 0 0 0 1  /base_link /right_sensor 100"/>
+-->
+</launch>
